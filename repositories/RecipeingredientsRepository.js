@@ -19,16 +19,18 @@
             }
             
             async findBy(field,value){
-                let recipeingredients = await models.recipeingredients.findAll({
+                let recipeingredients = await models.recipes.findAll({
                     where:{[field]:value},
                     include:[{
-                        model: models.recipes,
-                        as : 'Recipe',
-                    },{
-                        model: models.ingredients,
-                        as : 'Ingredient',
-                        }]
-
+                        model: models.recipeingredients,
+                        include: {
+                            model: models.ingredients,
+                            as: 'Ingredient',
+                            attributes:['Name', 'Description']
+                        },
+                        as : 'recipeingredients',
+                        attributes:['Quantity', 'Unit']
+                        }],
                 });
                 return recipeingredients;
             }
