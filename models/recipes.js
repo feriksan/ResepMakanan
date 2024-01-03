@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     URL: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     Servings: {
       type: DataTypes.INTEGER,
