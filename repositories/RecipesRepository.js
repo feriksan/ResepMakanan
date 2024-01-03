@@ -1,6 +1,7 @@
 
         const sequelize = require('../connection');
         const models = require('../models');
+        const { v4: uuidv4 } = require('uuid');
 
         class RecipesRepository{
             constructor(){
@@ -8,6 +9,8 @@
             }
 
             async create(obj){
+                obj.RecipeID = uuidv4();
+                console.log(uuidv4())
                 return await models.recipes.create(obj);
             }
 
@@ -26,7 +29,9 @@
             }
             
             async findAll(){
-                let recipes = await models.recipes.findAll();
+                let recipes = await models.recipes.findAll({
+                    order: [['CreatedAt', 'ASC']]
+                });
                 return recipes;
             }
             

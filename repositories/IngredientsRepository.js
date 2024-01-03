@@ -1,6 +1,7 @@
 
         const sequelize = require('../connection');
         const models = require('../models');
+        const { v4: uuidv4 } = require('uuid');
 
         class IngredientsRepository{
             constructor(){
@@ -8,6 +9,7 @@
             }
 
             async create(obj){
+                obj.IngredientID = uuidv4();
                 return await models.ingredients.create(obj);
             }
 
