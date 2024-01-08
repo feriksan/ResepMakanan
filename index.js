@@ -1,6 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
 var cors = require('cors');
+const https = require("https")
+const fs = require("fs");
+const path = require("path")
 var methodOverride = require('method-override');
 
 
@@ -25,4 +28,13 @@ app.use('/api/Recipeingredients',RecipeingredientsRoute);
 app.use('/api/RecipeTags',RecipeTagsRoute);
 app.use('/api/Tags',TagsRoute);
 
-app.listen(1818);
+https
+    .createServer(
+        {
+            key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+            cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem')),
+          },
+        app)
+    .listen(1818, () => {
+        console.log("Server Berjalan")
+    })

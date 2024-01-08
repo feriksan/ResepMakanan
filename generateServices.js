@@ -30,7 +30,7 @@ function buildClassRepo(tbl){
     const sequelize = require('../../connection');
     const `+classname+`Repository = require('../../repositories/`+classname+`Repository');
     const `+instancename+`Repository = new `+classname+`Repository();
-    
+
 
         class `+classname+`{
             constructor(){
