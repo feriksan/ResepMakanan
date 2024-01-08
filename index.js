@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 var cors = require('cors');
 const https = require("https")
+var http = require('http');
 const fs = require("fs");
 const path = require("path")
 var methodOverride = require('method-override');
@@ -27,7 +28,9 @@ app.use('/api/Ingredients',IngredientsRoute);
 app.use('/api/Recipeingredients',RecipeingredientsRoute);
 app.use('/api/RecipeTags',RecipeTagsRoute);
 app.use('/api/Tags',TagsRoute);
-
+http.createServer(app).listen(1919, () => {
+    console.log("Server Berjalan")
+})
 https
     .createServer(
         {
@@ -36,5 +39,5 @@ https
           },
         app)
     .listen(1818, () => {
-        console.log("Server Berjalan")
+        console.log("Server Berjalan Secure")
     })
